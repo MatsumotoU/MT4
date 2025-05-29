@@ -1,4 +1,6 @@
 #pragma once
+#define _USE_MATH_DEFINES
+#include <cmath>
 
 // 前方宣言
 class Vector3;
@@ -123,7 +125,7 @@ public:
 	/// <param name="translate">移動の情報</param>
 	/// <returns>3次元のアフィン行列</returns>
 	[[nodiscard]] static Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
-
+ 
 	/// <summary>
 	/// 任意軸回転行列を作成する
 	/// </summary>
@@ -131,6 +133,14 @@ public:
 	/// <param name="angle">ラジアン</param>
 	/// <returns></returns>
 	[[nodiscard]] static Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float angle);
+
+	/// <summary>
+	/// ある点からある点を向く任意軸回転行列を作成する
+	/// </summary>
+	/// <param name="from">見る人</param>
+	/// <param name="to">見られる人</param>
+	/// <returns></returns>
+	[[nodiscard]] static Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to);
 
 public:
 	/// <summary>
