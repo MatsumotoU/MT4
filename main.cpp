@@ -1,5 +1,6 @@
 #include <Novice.h>
 #include "Class/Math/MyMath.h"
+#include "Class/Math/Quaternion/Quaternion.h"
 
 const char kWindowTitle[] = "LE2A_14_マツモトユウタ_MT4";
 
@@ -13,17 +14,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
 
-	Vector3 from0{ 1.0f,0.7f,0.5f };
-	Vector3 to0 = -from0;
-	Vector3 from1 { -0.6f,0.9f,0.2f };
-	Vector3 to1{ 0.4f,0.7f,-0.5f };
+	Quaternion q1{};
+	q1.q = { 2.0f,3.0f,4.0f,1.0f };
 
-	from1 = from1.Normalize();
-	to1 = to1.Normalize();
+	Quaternion q2{};
+	q2.q = { 1.0f,3.0f,5.0f,2.0f };
 
-	Matrix4x4 rotateMatrix0 = Matrix4x4::DirectionToDirection({ 1.0f,0.0f,0.0f }, { -1.0f,0.0f,0.0f });
-	Matrix4x4 rotateMatrix1 = Matrix4x4::DirectionToDirection(from0, to0);
-	Matrix4x4 rotateMatrix2 = Matrix4x4::DirectionToDirection(from1, to1);
+	Quaternion identity{};
+	identity = Quaternion::IndentityQuaternion();
+
+	Quaternion conj{};
+	conj = Quaternion::ConjugationQuaternion(q1);
+
+	Quaternion inv = Quaternion::Inverse(q1);
+
+	Quaternion normal = Quaternion::Normalize(q1);
+
+	Quaternion mul1 = Quaternion::Multiply(q1, q2);
+
+	Quaternion mul2 = Quaternion::Multiply(q2, q1);
+
+	float norm = Quaternion::Norm(q1);
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -46,9 +57,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 
-		MatrixScreenPrintf(0, 0, rotateMatrix0, "rotateMatrix0");
-		MatrixScreenPrintf(0, 122, rotateMatrix1, "rotateMatrix1");
-		MatrixScreenPrintf(0, 244, rotateMatrix2, "rotateMatrix2");
+		VectorScreenPrintf(0, 0, identity.q, "Identity");
+		VectorScreenPrintf(0, 20, conj.q, "Conjugate");
+		VectorScreenPrintf(0, 40, inv.q, "Inverse");
+		VectorScreenPrintf(0, 60, normal.q, "Normalize");
+
+		VectorScreenPrintf(0, 100, mul1.q, "Multiply(q1,q2)");
+		VectorScreenPrintf(0, 120, mul2.q, "Multiply(q2,q1)");
+
+		Novice::ScreenPrintf(0, 140, "%.2f :%s", norm, "Norm");
 
 		///
 		/// ↑描画処理ここまで

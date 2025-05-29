@@ -92,6 +92,10 @@ void VectorScreenPrintf(int x, int y, Vector3 vector3, const char* str) {
 	Novice::ScreenPrintf(x, y, "%.2f %.2f %.2f %s", vector3.x, vector3.y, vector3.z, str);
 }
 
+void VectorScreenPrintf(int x, int y, Vector4 vector4, const char* str) {
+	Novice::ScreenPrintf(x, y, "%.2f %.2f %.2f %.2f %s", vector4.x, vector4.y, vector4.z, vector4.w, str);
+}
+
 void MatrixScreenPrintf(int x, int y, const Matrix4x4& matrix, const char* str) {
 	Novice::ScreenPrintf(x, y, str);
 	for (int row = 0; row < 4; ++row) {
@@ -400,7 +404,7 @@ void DrawOBB(const OBB& obb, const Matrix4x4& viewProjectionMatrix, const Matrix
 void DrawBezier(const Vector3& v1, const Vector3& v2, const Vector3& v3, const Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix, uint32_t color) {
 	for (float t = 0.0f; t < 1.0f; t += 0.1f) {
 		Vector3 beginPoint = Vector3::BezierCurve(v1, v2, v3, t);
-		Vector3 endPoint = Vector3::BezierCurve(v1, v2, v3, t+0.1f);
+		Vector3 endPoint = Vector3::BezierCurve(v1, v2, v3, t + 0.1f);
 		beginPoint = Vector3::Transform(Vector3::Transform(beginPoint, viewProjectionMatrix), viewportMatrix);
 		endPoint = Vector3::Transform(Vector3::Transform(endPoint, viewProjectionMatrix), viewportMatrix);
 		Novice::DrawLine(
@@ -605,8 +609,8 @@ int isCollision(const OBB& obb, const Sphere& sphere) {
 	Vector3 centerInOBBLocalSpace = Vector3::Transform(sphere.center, obbWorldMatrixInvers);
 
 	AABB aabbOBBLocal{ -obb.size,obb.size };
-	Sphere sphereOBBLocal{ centerInOBBLocalSpace ,sphere.radius,16};
-	return isCollision(aabbOBBLocal,sphereOBBLocal);
+	Sphere sphereOBBLocal{ centerInOBBLocalSpace ,sphere.radius,16 };
+	return isCollision(aabbOBBLocal, sphereOBBLocal);
 }
 
 int isCollision(const OBB& obb, const Segment& segment) {
@@ -711,7 +715,7 @@ int isCollision(const OBB& obb1, const OBB& obb2) {
 
 		float L1 = obb1Max - obb1Min;
 		float L2 = obb2Max - obb2Min;
-		Novice::ScreenPrintf(0,20+ 20 * axisIndex, "L1 = %.3f L2 = %.3f", L1,L2);
+		Novice::ScreenPrintf(0, 20 + 20 * axisIndex, "L1 = %.3f L2 = %.3f", L1, L2);
 
 		float sumSpan = L1 + L2;
 		float longSpan = max(obb1Max, obb2Max) - min(obb1Min, obb2Min);
