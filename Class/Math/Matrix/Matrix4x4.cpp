@@ -1,7 +1,6 @@
 #include "Matrix4x4.h"
 #include "../Vector/Vector3.h"
 #include <assert.h>
-#include <cmath>
 
 Matrix4x4 Matrix4x4::operator+(const Matrix4x4& other) const {
 	Matrix4x4 result = {};
@@ -537,6 +536,34 @@ Matrix4x4 Matrix4x4::MakeRotateAxisAngle(const Vector3& axis, float angle) {
 
 	result.m[3][3] = 1.0f;
 
+	return result;
+}
+
+Matrix4x4 Matrix4x4::DirectionToDirection(const Vector3& from, const Vector3& to) {
+	Matrix4x4 result{};
+
+	Vector3 u = from.Normalize();
+	Vector3 v = to.Normalize();
+
+	float dot = Vector3::Dot(u, v);
+
+	// ほぼ同じ方向の場合
+	if (std::abs(dot - 1.0f) < 1e-6f) {
+		return Matrix4x4::MakeIdentity4x4();
+	}
+
+	// ほぼ逆方向の場合（180度回転、任意の垂直軸で回転）
+	if (std::abs(dot + 1.0f) < 1e-6f) {
+		// uに垂直な任意軸を選ぶ
+		Vector3 axis = Vector3::Perpendicular(u).Normalize();
+		return Matrix4x4::MakeRotateAxisAngle(axis, static_cast<float>(M_PI));
+	}
+
+	// 通常ケース
+	Vector3 axis = Vector3::Cross(u, v).Normalize();
+	float angle = std::acosf(dot);
+
+	result = Matrix4x4::MakeRotateAxisAngle(axis, angle);
 	return result;
 }
 

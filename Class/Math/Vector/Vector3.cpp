@@ -14,7 +14,7 @@ Vector3 Vector3::Normalize() const {
     Vector3 result = {};
 
     if (this->Length() == 0.0f) {
-        assert(false);
+        return result;
     }
     result.x = this->x / this->Length();
     result.y = this->y / this->Length();
