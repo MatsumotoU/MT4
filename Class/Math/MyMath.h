@@ -143,6 +143,7 @@ Vector2 BezierCurve(Vector2 a, Vector2 b, Vector2 c, float pow,float t);
 void MatrixScreenPrintf(int x, int y, Matrix2x2 matrix);
 void MatrixScreenPrintf(int x, int y, Matrix3x3 matrix);
 void VectorScreenPrintf(int x, int y, Vector3 vector3,const char* str);
+void VectorScreenPrintf(int x, int y, Vector4 vector4, const char* str);
 void MatrixScreenPrintf(int x, int y, const Matrix4x4& matrix, const char* str);
 
 void DrawSegment(const Segment& segment,const Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix, uint32_t color);

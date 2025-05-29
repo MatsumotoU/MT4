@@ -59,6 +59,9 @@
     <ClCompile Include="Class\Math\MyMath.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Math\Quaternion\Quaternion.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -141,5 +144,6 @@
     <ClInclude Include="Class\Math\MathInclude.h" />
     <ClInclude Include="Class\Math\MyMath.h" />
     <ClInclude Include="Class\Math\Transform.h" />
+    <ClInclude Include="Class\Math\Quaternion\Quaternion.h" />
   </ItemGroup>
 </Project>

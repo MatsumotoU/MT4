@@ -119,6 +119,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="Class\Math\Matrix\Matrix3x3.cpp" />
     <ClCompile Include="Class\Math\Matrix\Matrix4x4.cpp" />
     <ClCompile Include="Class\Math\MyMath.cpp" />
+    <ClCompile Include="Class\Math\Quaternion\Quaternion.cpp" />
     <ClCompile Include="Class\Math\Vector\Vector2.cpp" />
     <ClCompile Include="Class\Math\Vector\Vector3.cpp" />
     <ClCompile Include="Class\Math\Vector\Vector4.cpp" />
@@ -157,6 +158,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="Class\Math\Matrix\Matrix3x3.h" />
     <ClInclude Include="Class\Math\Matrix\Matrix4x4.h" />
     <ClInclude Include="Class\Math\MyMath.h" />
+    <ClInclude Include="Class\Math\Quaternion\Quaternion.h" />
     <ClInclude Include="Class\Math\Transform.h" />
     <ClInclude Include="Class\Math\Vector\Vector2.h" />
     <ClInclude Include="Class\Math\Vector\Vector3.h" />
