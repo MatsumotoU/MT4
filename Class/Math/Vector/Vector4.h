@@ -1,4 +1,6 @@
 #pragma once
+class Vector3;
+
 class Vector4 final{
 public:
 	float x;
@@ -36,5 +38,11 @@ public:
 	/// </summary>
 	/// <returns>正規化された4次元ベクトル</returns>
 	[[nodiscard]] Vector4 Normalize() const;
+
+	/// <summary>
+	/// XYZの要素を抜き出します
+	/// </summary>
+	/// <returns></returns>
+	[[nodiscard]] Vector3 xyz() const;
 };
 
