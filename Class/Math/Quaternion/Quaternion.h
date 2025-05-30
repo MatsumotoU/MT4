@@ -2,6 +2,7 @@
 #include "../Vector/Vector4.h"
 
 class Vector3;
+class Matrix4x4;
 
 class Quaternion final {
 public:
@@ -74,4 +75,10 @@ public:
 	/// <param name="quaternion"></param>
 	/// <returns></returns>
 	[[nodiscard]] static Quaternion Inverse(const Quaternion& quaternion);
+
+	[[nodiscard]] static Quaternion MakeRotateAxisAngleQuaternion(const Vector3& axis, float angle);
+
+	[[nodiscard]] static Vector3 RotateVector(const Vector3& vector, const Quaternion& quaternion);
+
+	[[nodiscard]] static Matrix4x4 MakeRotateMatrix(const Quaternion& quaternion);
 };
