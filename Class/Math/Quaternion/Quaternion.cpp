@@ -167,3 +167,26 @@ Matrix4x4 Quaternion::MakeRotateMatrix(const Quaternion& quaternion) {
 
 	return result;
 }
+
+Quaternion Quaternion::Slerp(const Quaternion& q1, const Quaternion& q2, float t) {
+	Quaternion result{};
+	float dot = Vector3::Dot(q1.q.xyz(), q2.q.xyz());
+	Quaternion tempQ1 = q1;
+	Quaternion tempQ2 = q2;
+	if (dot < 0.0f) {
+		tempQ1.q = -q1.q;
+		dot = -dot;
+	}
+
+	float theta = std::acosf(dot);
+	float t0 = 0.0f;
+	float t1 = 0.0f;
+	if (std::sinf(theta) != 0.0f) {
+		t0 = std::sinf((1.0f - t) * theta) / std::sinf(theta);
+		t1 = std::sinf(t * theta) / std::sinf(theta);
+	}
+
+	result.q = tempQ1.q * t0 + tempQ2.q * t1;
+
+	return result;
+}

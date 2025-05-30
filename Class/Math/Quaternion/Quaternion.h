@@ -75,10 +75,26 @@ public:
 	/// <param name="quaternion"></param>
 	/// <returns></returns>
 	[[nodiscard]] static Quaternion Inverse(const Quaternion& quaternion);
-
+	/// <summary>
+	/// 任意の軸からクオータニオンを作成します
+	/// </summary>
+	/// <param name="axis"></param>
+	/// <param name="angle"></param>
+	/// <returns></returns>
 	[[nodiscard]] static Quaternion MakeRotateAxisAngleQuaternion(const Vector3& axis, float angle);
-
+	/// <summary>
+	/// クオータニオンでベクトルを回転させます
+	/// </summary>
+	/// <param name="vector"></param>
+	/// <param name="quaternion"></param>
+	/// <returns></returns>
 	[[nodiscard]] static Vector3 RotateVector(const Vector3& vector, const Quaternion& quaternion);
-
+	/// <summary>
+	/// クオータニオンから回転行列を作成します
+	/// </summary>
+	/// <param name="quaternion"></param>
+	/// <returns></returns>
 	[[nodiscard]] static Matrix4x4 MakeRotateMatrix(const Quaternion& quaternion);
+
+	[[nodiscard]] static Quaternion Slerp(const Quaternion& q1, const Quaternion& q2, float t);
 };
